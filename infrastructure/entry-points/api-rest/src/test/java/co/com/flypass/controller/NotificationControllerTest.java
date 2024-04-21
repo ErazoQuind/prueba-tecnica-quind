@@ -34,42 +34,33 @@ class NotificationControllerTest {
     private ObjectMapper objectMapper;
 
     @MockBean
-    private IUserHandler clientHandler;
+    private IUserHandler userHandler;
 
     @Test
     void testAddClientWithReturnedResponseAsObject() throws Exception {
         UserRequestDTO requestDTO = getClientRequestDTO();
-        UserResponseDTO expectedResponse = getClientResponseDTO();
-        when(clientHandler.save(Mockito.any(UserRequestDTO.class))).thenReturn(expectedResponse);
 
-        MvcResult result = mockMvc.perform(post("/api/v1/client")
+        mockMvc.perform(post("/api/v1/client")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(asJsonString(requestDTO)))
                 .andExpect(status().isCreated())
-                .andReturn();
+                .andExpect(jsonPath("$.message").value(Constants.CLIENT_CREATED_MESSAGE));
 
-        String content = result.getResponse().getContentAsString();
-        UserResponseDTO actualResponse = new ObjectMapper().readValue(content, UserResponseDTO.class);
-
-        assertThat(actualResponse).isEqualTo(expectedResponse);
-        verify(clientHandler, times(1)).save(any(UserRequestDTO.class));
-
+        verify(userHandler, times(1)).save(any(UserRequestDTO.class));
     }
 
     @Test
     void testUpdateClientWithReturnedSomeProperties() throws Exception {
         UserUpdateRequestDTO requestDTO = getClientUpdateRequestDTO();
-        UserResponseDTO responseDTO = getClientResponseDTO();
-        when(clientHandler.update(Mockito.any(UserUpdateRequestDTO.class))).thenReturn(responseDTO);
 
         mockMvc.perform(put("/api/v1/client/update")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(asJsonString(requestDTO)))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.firstName").value("John"))
-                .andExpect(jsonPath("$.lastName").value("Doe"));
+                .andExpect(jsonPath("$.message").value(Constants.CLIENT_UPDATED_MESSAGE));
 
-        verify(clientHandler, times(1)).update(any(UserUpdateRequestDTO.class));
+
+        verify(userHandler, times(1)).update(any(UserUpdateRequestDTO.class));
     }
 
     @Test
