@@ -2,41 +2,41 @@ package co.com.flypass.error;
 
 public class ErrorResponse {
 
-    private String statusCode;
-    private String message;
-    private String technicalDetail;
+    private String exceptionName;
+    private String userMessage;
+    private String technicalMessage;
 
     public ErrorResponse() {
     }
 
-    public ErrorResponse(String statusCode, String message, String technicalDetail) {
-        this.statusCode = statusCode;
-        this.message = message;
-        this.technicalDetail = technicalDetail;
+    public ErrorResponse(String exceptionName, String userMessage, String technicalMessage) {
+        this.exceptionName = exceptionName;
+        this.userMessage = userMessage;
+        this.technicalMessage = technicalMessage;
     }
 
-    public String getStatusCode() {
-        return statusCode;
+    public String getExceptionName() {
+        return exceptionName;
     }
 
-    public void setStatusCode(String statusCode) {
-        this.statusCode = statusCode;
+    public void setExceptionName(String exceptionName) {
+        this.exceptionName = exceptionName;
     }
 
-    public String getMessage() {
-        return message;
+    public String getUserMessage() {
+        return userMessage;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setUserMessage(String userMessage) {
+        this.userMessage = userMessage;
     }
 
-    public String getTechnicalDetail() {
-        return technicalDetail;
+    public String getTechnicalMessage() {
+        return technicalMessage;
     }
 
-    public void setTechnicalDetail(String technicalDetail) {
-        this.technicalDetail = technicalDetail;
+    public void setTechnicalMessage(String technicalMessage) {
+        this.technicalMessage = technicalMessage;
     }
 
     public static ErrorResponseBuilder builder() {
@@ -44,39 +44,44 @@ public class ErrorResponse {
     }
 
     public ErrorResponseBuilder toBuilder() {
-        return new ErrorResponseBuilder().statusCode(this.statusCode).message(this.message).technicalDetail(this.technicalDetail);
+        return new ErrorResponseBuilder().exceptionName(this.exceptionName).userMessage(this.userMessage).technicalMessage(this.technicalMessage);
     }
 
 
     public static class ErrorResponseBuilder {
-        private String statusCode;
-        private String message;
-        private String technicalDetail;
+        private String exceptionName;
+        private String userMessage;
+        private String technicalMessage;
 
         ErrorResponseBuilder() {
         }
 
-        public ErrorResponseBuilder statusCode(String statusCode) {
-            this.statusCode = statusCode;
+        public ErrorResponseBuilder exceptionName(String exceptionName) {
+            this.exceptionName = exceptionName;
             return this;
         }
 
-        public ErrorResponseBuilder message(String message) {
-            this.message = message;
+        public ErrorResponseBuilder userMessage(String userMessage) {
+            this.userMessage = userMessage;
             return this;
         }
 
-        public ErrorResponseBuilder technicalDetail(String technicalDetail) {
-            this.technicalDetail = technicalDetail;
+        public ErrorResponseBuilder technicalMessage(String technicalMessage) {
+            this.technicalMessage = technicalMessage;
             return this;
         }
 
         public ErrorResponse build() {
-            return new ErrorResponse(this.statusCode, this.message, this.technicalDetail);
+            return new ErrorResponse(this.exceptionName, this.userMessage, this.technicalMessage);
         }
 
+        @Override
         public String toString() {
-            return "ErrorResponse.ErrorResponseBuilder(statusCode=" + this.statusCode + ", message=" + this.message + ", technicalDetail=" + this.technicalDetail + ")";
+            return "ErrorResponseBuilder{" +
+                    "exceptionName='" + exceptionName + '\'' +
+                    ", userMessage='" + userMessage + '\'' +
+                    ", technicalMessage='" + technicalMessage + '\'' +
+                    '}';
         }
     }
 
