@@ -1,0 +1,34 @@
+#endpoints:
+#  enabled: false
+info:
+  component: prueba-tecnica
+spring:
+  application:
+    name: prueba-tecnica
+  profiles:
+    active: dev
+  datasource:
+    postgresql:
+      url: jdbc:postgresql://localhost:5432/test_quind_bd
+      driverClassName: org.postgresql.Driver
+      username: prueba
+      password: pruebapass
+  jpa:
+    postgresql:
+      databasePlatform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+server:
+  servlet:
+    context-path: "/prueba-tecnica"
+  port: 8181
+
+resilience4j:
+  retry:
+    instances:
+      pruebaRetry:
+        maxAttempts: 3
+        waitDuration: 1s
+        enableExponentialBackoff: true
+        exponentialBackoffMultiplier: 2
+        retryExceptions:
+          - java.lang.Throwable
