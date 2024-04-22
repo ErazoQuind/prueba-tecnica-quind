@@ -10,13 +10,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 import co.com.flypass.constants.Constants;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
@@ -44,7 +42,7 @@ class NotificationControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(asJsonString(requestDTO)))
                 .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.message").value(Constants.CLIENT_CREATED_MESSAGE));
+                .andExpect(jsonPath("$.message").value(Constants.USER_CREATED_MESSAGE));
 
         verify(userHandler, times(1)).save(any(UserRequestDTO.class));
     }
@@ -57,7 +55,7 @@ class NotificationControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(asJsonString(requestDTO)))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.message").value(Constants.CLIENT_UPDATED_MESSAGE));
+                .andExpect(jsonPath("$.message").value(Constants.USER_UPDATED_MESSAGE));
 
 
         verify(userHandler, times(1)).update(any(UserUpdateRequestDTO.class));
@@ -69,7 +67,7 @@ class NotificationControllerTest {
 
         mockMvc.perform(delete("/api/v1/client/{clientId}", clientId))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.message").value(Constants.CLIENT_DELETED_MESSAGE));
+                .andExpect(jsonPath("$.message").value(Constants.USER_DELETED_MESSAGE));
     }
 
     private String asJsonString(Object obj) {

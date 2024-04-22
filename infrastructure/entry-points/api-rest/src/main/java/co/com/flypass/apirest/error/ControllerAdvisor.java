@@ -2,9 +2,7 @@ package co.com.flypass.apirest.error;
 
 import co.com.flypass.constants.Constants;
 import co.com.flypass.error.ErrorResponse;
-import co.com.flypass.exception.BadRequestException;
-import co.com.flypass.exception.CustomException;
-import co.com.flypass.exception.ValidationException;
+import co.com.flypass.exception.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -26,6 +24,8 @@ public class ControllerAdvisor {
     public ControllerAdvisor() {
         STATUS_MAP.put(BadRequestException.class.getSimpleName(), HttpStatus.BAD_REQUEST);
         STATUS_MAP.put(ValidationException.class.getSimpleName(), HttpStatus.UNPROCESSABLE_ENTITY);
+        STATUS_MAP.put(NotFoundException.class.getSimpleName(), HttpStatus.NOT_FOUND);
+        STATUS_MAP.put(AlreadyExistException.class.getSimpleName(), HttpStatus.UNPROCESSABLE_ENTITY);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

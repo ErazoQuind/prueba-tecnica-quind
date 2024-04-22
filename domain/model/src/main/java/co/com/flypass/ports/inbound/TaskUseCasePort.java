@@ -9,4 +9,8 @@ public interface TaskUseCasePort {
     List<Task> getAllTasks();
 
     List<Task> getAllTasksByCriteria(String status, LocalDate startDate, String assignedTo, String priority, String sort);
+
+    void createTask(Task task);
+
+    void updateTask(Task task);
 }

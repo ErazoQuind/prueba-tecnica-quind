@@ -43,7 +43,7 @@ public class UserController {
     @PostMapping
     public ResponseEntity<Map<String,String>> add(@Valid @RequestBody UserRequestDTO userRequestDTO) {
         clientHandler.save(userRequestDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).body(Collections.singletonMap(Constants.RESPONSE_MESSAGE_KEY,Constants.CLIENT_CREATED_MESSAGE));
+        return ResponseEntity.status(HttpStatus.CREATED).body(Collections.singletonMap(Constants.RESPONSE_MESSAGE_KEY,Constants.USER_CREATED_MESSAGE));
     }
 
     @Operation(summary = "actualizar user",
@@ -57,7 +57,7 @@ public class UserController {
     @PutMapping(path = "/update")
     public ResponseEntity<Map<String,String>> update(@Valid @RequestBody UserUpdateRequestDTO userUpdateRequestDTO) {
         clientHandler.update(userUpdateRequestDTO);
-        return ResponseEntity.status(HttpStatus.OK).body(Collections.singletonMap(Constants.RESPONSE_MESSAGE_KEY,Constants.CLIENT_UPDATED_MESSAGE));
+        return ResponseEntity.status(HttpStatus.OK).body(Collections.singletonMap(Constants.RESPONSE_MESSAGE_KEY,Constants.USER_UPDATED_MESSAGE));
     }
 
     @Operation(summary = "Elimina un user por ID",
@@ -75,7 +75,7 @@ public class UserController {
     public ResponseEntity<Map<String,String>> deleteUserById(@PathVariable Long clientId){
         clientHandler.deleteClientById(clientId);
         return ResponseEntity.status(HttpStatus.OK)
-                .body(Collections.singletonMap(Constants.RESPONSE_MESSAGE_KEY,Constants.CLIENT_DELETED_MESSAGE));
+                .body(Collections.singletonMap(Constants.RESPONSE_MESSAGE_KEY,Constants.USER_DELETED_MESSAGE));
     }
 
 }

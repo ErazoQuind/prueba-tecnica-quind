@@ -1,5 +1,6 @@
 package co.com.flypass.apirest.handlers.implement;
 
+import co.com.flypass.apirest.dtos.request.task.TaskRequestDTO;
 import co.com.flypass.apirest.dtos.response.CustomTaskResponseDTO;
 import co.com.flypass.apirest.dtos.response.TaskResponseDTO;
 import co.com.flypass.apirest.handlers.ITaskHandler;
@@ -47,5 +48,13 @@ public class TaskHandlerImpl implements ITaskHandler {
         return response;
     }
 
+    @Override
+    public void createTask(TaskRequestDTO taskRequestDTO) {
+        taskUseCase.createTask(taskDTOMapper.toTask(taskRequestDTO));
+    }
 
+    @Override
+    public void updateTask(TaskRequestDTO taskRequestDTO) {
+        taskUseCase.updateTask(taskDTOMapper.toTask(taskRequestDTO));
+    }
 }

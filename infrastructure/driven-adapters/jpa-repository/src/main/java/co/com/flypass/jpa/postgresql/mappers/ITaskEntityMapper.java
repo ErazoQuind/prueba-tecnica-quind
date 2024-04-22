@@ -5,4 +5,6 @@ import co.com.flypass.models.Task;
 
 public interface ITaskEntityMapper {
     Task toTask(TaskEntity taskEntity);
+
+    TaskEntity toTaskentity(Task task);
 }

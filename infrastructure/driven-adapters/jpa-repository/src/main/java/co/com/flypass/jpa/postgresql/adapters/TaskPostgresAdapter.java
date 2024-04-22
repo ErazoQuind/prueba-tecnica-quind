@@ -31,4 +31,16 @@ public class TaskPostgresAdapter implements TaskRepositoryPort {
     public List<Task> getAllTasksByCriteria(String status, LocalDate startDate, String assignedTo, String priority, String sort) {
         return taskRepository.findByCriteria(status, startDate, assignedTo, priority, sort).stream().map(taskEntityMapper::toTask).toList();
     }
+
+    @Override
+    public void save(Task task) {
+        taskRepository.save(taskEntityMapper.toTaskentity(task));
+    }
+
+    @Override
+    public boolean existsById(String taskCode) {
+        return taskRepository.existsById(taskCode);
+    }
+
+
 }
