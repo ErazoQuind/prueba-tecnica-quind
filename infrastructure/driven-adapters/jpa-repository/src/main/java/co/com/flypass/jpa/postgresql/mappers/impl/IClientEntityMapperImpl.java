@@ -3,9 +3,9 @@ package co.com.flypass.jpa.postgresql.mappers.impl;
 import co.com.flypass.jpa.postgresql.entities.UserEntity;
 import co.com.flypass.jpa.postgresql.mappers.IClientEntityMapper;
 import co.com.flypass.models.User;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
-@Service
+@Component
 public class IClientEntityMapperImpl implements IClientEntityMapper {
     @Override
     public User toUser(UserEntity userEntity) {

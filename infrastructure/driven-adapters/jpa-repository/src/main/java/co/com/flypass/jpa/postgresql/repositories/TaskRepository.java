@@ -1,9 +1,26 @@
 package co.com.flypass.jpa.postgresql.repositories;
 
 
-import co.com.flypass.jpa.postgresql.entities.TaskEntiy;
-import org.springframework.data.repository.CrudRepository;
+import co.com.flypass.jpa.postgresql.entities.TaskEntity;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.ListCrudRepository;
+import org.springframework.data.repository.query.Param;
 
-public interface TaskRepository extends CrudRepository<TaskEntiy, String> {
+import java.time.LocalDate;
+import java.util.List;
 
+public interface TaskRepository extends ListCrudRepository<TaskEntity, String> {
+
+    @Query(value = "SELECT * FROM Task t WHERE " +
+            "(:status IS NULL OR t.status = :status) AND " +
+            "(:startDate IS NULL OR t.start_date = :startDate) AND " +
+            "(:assignedTo IS NULL OR t.assigned_to = :assignedTo) AND " +
+            "(:priority IS NULL OR t.priority = :priority)",
+            nativeQuery = true)
+    List<TaskEntity> findByCriteria(
+            @Param("status") String status,
+            @Param("startDate") LocalDate startDate,
+            @Param("assignedTo") String assignedTo,
+            @Param("priority") String priority
+    );
 }

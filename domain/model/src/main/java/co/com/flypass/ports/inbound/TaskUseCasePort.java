@@ -1,5 +1,9 @@
 package co.com.flypass.ports.inbound;
 
-public interface TaskUseCasePort {
+import co.com.flypass.models.Task;
 
+import java.util.List;
+
+public interface TaskUseCasePort {
+    List<Task> getAllTasks();
 }

@@ -10,9 +10,9 @@
     </appender>
 
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>opt/despliegue/microservices/logs/backend-arquetipo/backend-arquetipo-log.log</file>
+        <file>opt/despliegue/microservices/logs/prueba-tecnica-quind/prueba-tecnica-quind-log.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
-            <fileNamePattern>{APP_NAME}Log.log.%i</fileNamePattern>
+            <fileNamePattern>prueba-tecnica-quindLog.log.%i</fileNamePattern>
             <minIndex>1</minIndex>
             <maxIndex>3</maxIndex>
         </rollingPolicy>

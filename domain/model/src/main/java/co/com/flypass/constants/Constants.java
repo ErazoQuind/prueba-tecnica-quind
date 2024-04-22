@@ -18,5 +18,6 @@ public class Constants {
     public static final String TASK_DELETED_MESSAGE = "Task deleted successfully";
 
     public static final String DEFAULT_MESSAGE_ERROR = "Ocurrió un error procesando la solicitud, por favor contacta al administrador del sistema";
+    public static final String SUCCESSFUL_REQUEST = "La solicitud fué exitosa";
 
 }

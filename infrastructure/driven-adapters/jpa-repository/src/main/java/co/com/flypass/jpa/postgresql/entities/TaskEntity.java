@@ -5,42 +5,39 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 @Entity
 @Table(name = "task")
-public class TaskEntiy {
+public class TaskEntity {
     @Id
     @Column(name = "task_code")
     private String taskCode;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "addition_date")
+    @Column(name = "addition_date", nullable = false)
     private LocalDate additionDate;
 
-    @Column(name = "description")
+    @Column(name = "description", nullable = false)
     private String description;
 
-    @Column(name = "assigned_person")
+    @Column(name = "assigned_person", nullable = false)
     private String assignedPerson;
 
-    @Column(name = "status")
+    @Column(name = "status", nullable = false)
     private String status;
 
-    @Column(name = "priority")
+    @Column(name = "priority", nullable = false)
     private String priority;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "start_date")
+    @Column(name = "start_date", nullable = false)
     private LocalDate startDate;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "end_date")
+    @Column(name = "end_date", nullable = false)
     private LocalDate endDate;
 
-    @Column(name = "comments")
+    @Column(name = "comments", length = 200)
     private String comments;
 
-    public TaskEntiy() {
+    public TaskEntity() {
     }
 
-    public TaskEntiy(String taskCode, LocalDate additionDate, String description, String assignedPerson, String status, String priority, LocalDate startDate, LocalDate endDate, String comments) {
+    public TaskEntity(String taskCode, LocalDate additionDate, String description, String assignedPerson, String status, String priority, LocalDate startDate, LocalDate endDate, String comments) {
         this.taskCode = taskCode;
         this.additionDate = additionDate;
         this.description = description;
