@@ -13,18 +13,6 @@ public class Task {
     private LocalDate endDate;
     private String comments;
 
-    public Task(String taskCode, LocalDate additionDate, String description, String assignedPerson, String status, String priority, LocalDate startDate, LocalDate endDate, String comments) {
-        this.taskCode = taskCode;
-        this.additionDate = additionDate;
-        this.description = description;
-        this.assignedPerson = assignedPerson;
-        this.status = status;
-        this.priority = priority;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.comments = comments;
-    }
-
     public String getTaskCode() {
         return taskCode;
     }

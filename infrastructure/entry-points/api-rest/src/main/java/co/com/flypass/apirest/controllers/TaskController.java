@@ -1,14 +1,12 @@
 package co.com.flypass.apirest.controllers;
 
 import co.com.flypass.apirest.dtos.response.CustomTaskResponseDTO;
-import co.com.flypass.apirest.dtos.response.TaskResponseDTO;
 import co.com.flypass.apirest.handlers.ITaskHandler;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/v1/task")
