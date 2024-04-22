@@ -8,6 +8,8 @@ import co.com.flypass.constants.Constants;
 import co.com.flypass.ports.inbound.TaskUseCasePort;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.List;
 
 
@@ -22,12 +24,28 @@ public class TaskHandlerImpl implements ITaskHandler {
     }
 
     @Override
-    public CustomTaskResponseDTO getAllTasks() {
+    public CustomTaskResponseDTO getAllTasks(String sort) {
         CustomTaskResponseDTO response = new CustomTaskResponseDTO();
         List<TaskResponseDTO> taskResponseDTOList = taskUseCase.getAllTasks().stream().map(taskDTOMapper::toTaskResponseDto).toList();
+        if (sort.equals("DESC")) {
+            Comparator<TaskResponseDTO> comparator = Comparator.comparing(TaskResponseDTO::getAdditionDate).reversed();
+            taskResponseDTOList = taskResponseDTOList.stream().sorted(comparator).toList();
+        }
+
+        response.setTaskResponseDTOList(taskResponseDTOList);
+        response.setMessage(Constants.SUCCESSFUL_REQUEST);
+
+        return response;
+    }
+
+    @Override
+    public CustomTaskResponseDTO getAllTasksByCriteria(String status, LocalDate startDate, String assignedTo, String priority, String sort) {
+        CustomTaskResponseDTO response = new CustomTaskResponseDTO();
+        List<TaskResponseDTO> taskResponseDTOList = taskUseCase.getAllTasksByCriteria(status,startDate,assignedTo,priority,sort).stream().map(taskDTOMapper::toTaskResponseDto).toList();
         response.setTaskResponseDTOList(taskResponseDTOList);
         response.setMessage(Constants.SUCCESSFUL_REQUEST);
         return response;
     }
+
 
 }

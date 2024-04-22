@@ -14,13 +14,16 @@ public interface TaskRepository extends ListCrudRepository<TaskEntity, String> {
     @Query(value = "SELECT * FROM Task t WHERE " +
             "(:status IS NULL OR t.status = :status) AND " +
             "(:startDate IS NULL OR t.start_date = :startDate) AND " +
-            "(:assignedTo IS NULL OR t.assigned_to = :assignedTo) AND " +
-            "(:priority IS NULL OR t.priority = :priority)",
+            "(:assignedTo IS NULL OR t.assigned_person = :assignedTo) AND " +
+            "(:priority IS NULL OR t.priority = :priority) " +
+            "ORDER BY CASE WHEN :sort = 'DESC' THEN t.addition_date END DESC, " +
+            "         CASE WHEN :sort = 'ASC' THEN t.addition_date END ASC",
             nativeQuery = true)
     List<TaskEntity> findByCriteria(
             @Param("status") String status,
             @Param("startDate") LocalDate startDate,
             @Param("assignedTo") String assignedTo,
-            @Param("priority") String priority
+            @Param("priority") String priority,
+            @Param("sort") String sort
     );
 }
