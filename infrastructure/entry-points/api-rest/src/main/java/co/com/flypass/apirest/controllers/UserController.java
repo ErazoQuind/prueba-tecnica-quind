@@ -33,9 +33,9 @@ public class UserController {
     }
 
     @Operation(
-            summary = "Crear un cliente",
+            summary = "Crear un user",
             responses = {
-                    @ApiResponse(responseCode = "201", description = "cliente creado",
+                    @ApiResponse(responseCode = "201", description = "user creado",
                             content = @Content(mediaType = "application/json", schema = @Schema(implementation = UserResponseDTO.class, description = "respuesta de la solicitud"))),
                     @ApiResponse(responseCode = "422", description = "no se pudo procesar la operacion de guardar",
                             content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Error")))
@@ -46,7 +46,7 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).body(Collections.singletonMap(Constants.RESPONSE_MESSAGE_KEY,Constants.CLIENT_CREATED_MESSAGE));
     }
 
-    @Operation(summary = "actualizar cliente",
+    @Operation(summary = "actualizar user",
             responses = {
                     @ApiResponse(responseCode = "200", description = "client created",
                             content = @Content(mediaType = "application/json", schema = @Schema(implementation = UserResponseDTO.class, description = "respuesta de la solicitud"))),
@@ -60,12 +60,12 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(Collections.singletonMap(Constants.RESPONSE_MESSAGE_KEY,Constants.CLIENT_UPDATED_MESSAGE));
     }
 
-    @Operation(summary = "Elimina un cliente por ID",
+    @Operation(summary = "Elimina un user por ID",
             parameters = {
-                    @Parameter(name = "clientId", in = ParameterIn.PATH, required = true, description = "ID del cliente")
+                    @Parameter(name = "clientId", in = ParameterIn.PATH, required = true, description = "ID del user")
             },
             responses = {
-                    @ApiResponse(responseCode = "200", description = "cliente eliminado",
+                    @ApiResponse(responseCode = "200", description = "user eliminado",
                             content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Map"))),
                     @ApiResponse(responseCode = "422", description = "no se pudo procesar la operacion de eliminado",
                             content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Error"))
