@@ -15,13 +15,15 @@ import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
 import java.util.Map;
 
 @RestController
-@RequestMapping(value = "/api/v1/client", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/api/v1/user", produces = MediaType.APPLICATION_JSON_VALUE)
+@Validated
 public class UserController {
 
     private final IUserHandler clientHandler;

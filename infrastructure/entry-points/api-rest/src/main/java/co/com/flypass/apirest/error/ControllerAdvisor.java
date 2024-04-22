@@ -12,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.HashMap;
@@ -29,6 +28,17 @@ public class ControllerAdvisor {
         STATUS_MAP.put(ValidationException.class.getSimpleName(), HttpStatus.UNPROCESSABLE_ENTITY);
     }
 
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<Object> handleValidationExceptions(MethodArgumentNotValidException ex) {
+        Map<String, String> errors = new HashMap<>();
+        ex.getBindingResult().getAllErrors().forEach(error -> {
+            String field = ((FieldError) error).getField();
+            String message = error.getDefaultMessage();
+            errors.put(field, message);
+        });
+        return ResponseEntity.badRequest().body(errors);
+    }
+
     @ExceptionHandler(CustomException.class)
     public ResponseEntity<ErrorResponse> handleBadRequestException(CustomException customException) {
         HttpStatus status = STATUS_MAP.get(customException.getClass().getSimpleName());
@@ -38,19 +48,6 @@ public class ControllerAdvisor {
                 .technicalMessage(customException.getTechnicalMessage())
                 .build();
         return ResponseEntity.status(status).body(errorResponse);
-    }
-
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ResponseEntity<Map<String, String>> handleValidationExceptions(MethodArgumentNotValidException ex) {
-        Map<String, String> errors = new HashMap<>();
-        ex.getBindingResult().getAllErrors().forEach(error -> {
-            String field = ((FieldError) error).getField();
-            String message = error.getDefaultMessage();
-            errors.put(field, message);
-        });
-        LOGGER.error(ex.getMessage());
-        return ResponseEntity.badRequest().body(errors);
     }
 
     @ExceptionHandler(Exception.class)

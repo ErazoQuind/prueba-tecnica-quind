@@ -1,35 +1,29 @@
 package co.com.flypass.apirest.dtos.request.client;
 
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 public class UserRequestDTO {
-    @Valid
-    @NotNull
+    @NotBlank
     private String identificationType;
 
-    @Valid
     @NotNull
     private Long identificationNumber;
 
-    @Valid
     @NotNull
     @Size(min=2,max=20)
     private String firstName;
 
-    @Valid
     @NotNull
     @Size(min=2,max=20)
     private String lastName;
 
-    @Valid
     @NotNull
     @Email
     private String emailAddress;
 
-    @Valid
     @NotNull
     private String dateOfBirth;
     private String creationDate;
