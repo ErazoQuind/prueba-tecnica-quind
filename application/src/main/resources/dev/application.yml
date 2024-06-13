@@ -21,3 +21,10 @@ server:
   servlet:
     context-path: "/prueba-tecnica"
   port: 8181
+
+api:
+  notification:
+    urlNotification: "http://localhost:8080/marketing-notifications/api/v1/notifications/"
+    uriMessage: "send/message"
+    maxAttempts: 3
+    minBackoffSeconds: 2

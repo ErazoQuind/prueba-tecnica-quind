@@ -1,4 +1,4 @@
-package co.com.flypass.apirest.dtos.request.client;
+package co.com.flypass.apirest.dtos.request.user;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;

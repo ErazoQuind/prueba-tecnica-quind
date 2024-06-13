@@ -1,7 +1,7 @@
 package co.com.flypass.apirest.mappers;
 
-import co.com.flypass.apirest.dtos.request.client.UserRequestDTO;
-import co.com.flypass.apirest.dtos.request.client.UserUpdateRequestDTO;
+import co.com.flypass.apirest.dtos.request.user.UserRequestDTO;
+import co.com.flypass.apirest.dtos.request.user.UserUpdateRequestDTO;
 import co.com.flypass.apirest.dtos.response.UserResponseDTO;
 import co.com.flypass.models.User;
 

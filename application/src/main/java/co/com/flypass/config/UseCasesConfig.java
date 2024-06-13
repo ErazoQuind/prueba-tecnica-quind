@@ -2,10 +2,10 @@ package co.com.flypass.config;
 
 
 import co.com.flypass.ports.inbound.TaskUseCasePort;
-import co.com.flypass.ports.outbound.ClientRepositoryPort;
-import co.com.flypass.ports.inbound.ClientUseCasePort;
+import co.com.flypass.ports.outbound.UserRepositoryPort;
+import co.com.flypass.ports.inbound.UserUseCasePort;
 import co.com.flypass.ports.outbound.TaskRepositoryPort;
-import co.com.flypass.usecase.ClientUseCase;
+import co.com.flypass.usecase.UserUseCase;
 import co.com.flypass.usecase.TaskUseCase;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,8 +13,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class UseCasesConfig {
         @Bean
-        public ClientUseCasePort clientUseCase(ClientRepositoryPort clientRepositoryPort){
-                return new ClientUseCase(clientRepositoryPort);
+        public UserUseCasePort clientUseCase(UserRepositoryPort userRepositoryPort){
+                return new UserUseCase(userRepositoryPort);
         }
 
         @Bean
